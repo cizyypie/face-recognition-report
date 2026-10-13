@@ -31,3 +31,4 @@
 Pada simulasi jaringan lambat (3G throttling dengan latensi 500 ms dan packet loss 10%):
 - Helper `postEnrollWithRetry()` berhasil menyelesaikan pendaftaran pada percobaan ke-2 tanpa meminta pengguna mengulang gerakan pose.
 - Pengguna mendapatkan informasi visual `"Koneksi lambat, mencoba ulang (2/3)..."` secara transparan.
+

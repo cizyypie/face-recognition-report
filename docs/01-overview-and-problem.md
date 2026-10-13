@@ -39,3 +39,4 @@ Tanpa mekanisme pengikatan bukti verifikasi, endpoint pencatatan absensi dapat d
 3. **Server-Side Same-Pose Matching:** Seluruh proses pencocokan biometrik dipindahkan ke backend controller. Template biometrik tidak pernah dikirim ke peramban (*zero-leak*), dan perbandingan dilakukan spesifik pose-ke-pose.
 4. **Tokenisasi Redis `proofNo`:** Penerbitan token sekali pakai dengan masa aktif 300 detik yang langsung dikonsumsi (dihapus) saat absensi dicatat.
 5. **Persistent Cache Storage & Pose Sampling:** Berkas model disimpan di Cache Storage browser untuk memangkas *cold start*, dan deskriptor pose dihitung dari rata-rata 3 frame untuk kestabilan vektor.
+

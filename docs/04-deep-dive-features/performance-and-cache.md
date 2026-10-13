@@ -64,3 +64,4 @@ Pengiriman data pendaftaran wajah (`POST /mobile/insertFaceRecognition`) kini di
 - Maksimal 3 kali percobaan dengan jeda bertingkat (2 detik, lalu 4 detik).
 - **Hanya Diulang pada Masalah Jaringan:** Request hanya diulang jika terjadi *timeout*, *network error*, atau respons HTTP 5xx. Jika penolakan berasal dari logika bisnis (skor anti-spoof rendah atau wajah tidak cocok), permintaan tidak diulang.
 - Data foto dan deskriptor yang sudah direkam tetap tersimpan di memori Vue, sehingga jika koneksi gagal total pengguna cukup menekan tombol coba kirim kembali tanpa perlu mengulang pengambilan pose wajah dari awal.
+

@@ -70,3 +70,4 @@ python3 generate_pptx.py
 ```
 
 Berkas `face-recognition-presentation.pptx` akan diperbarui secara otomatis.
+

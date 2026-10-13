@@ -48,3 +48,4 @@ Pada kode lama, identitas karyawan diambil langsung dari parameter body perminta
 3. **Parameter Body (`idUser`):** Hanya berfungsi sebagai fallback terakhir untuk skenario administratif tertentu (misal admin mendaftarkan wajah karyawan lain).
 
 Refaktorisasi ini diterapkan secara identik pada kedua endpoint utama: `insertFaceRecognition` (pendaftaran) dan `checkFaceRecongnition` (presensi).
+

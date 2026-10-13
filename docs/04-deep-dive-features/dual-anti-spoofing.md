@@ -46,3 +46,4 @@ Mengevaluasi foto tunggal resolusi penuh yang dikirim saat pengguna menuntaskan 
 - **Ambang Batas Keputusan:** Ditetapkan `0.50` secara konsisten antara client dan server (sejak commit `4962d6cb`). Jika skor server `< 0.50`, transaksi absensi langsung ditolak.
 - **Circuit Breaker Redis:**
   Jika sidecar gagal merespons atau mengembalikan galat sebanyak 3 kali berturut-turut dalam durasi 60 detik, controller backend secara otomatis mengaktifkan mode *circuit breaker* (`attendance:facesvc:down` TTL 60 detik) untuk mencegah penumpukan antrean koneksi.
+

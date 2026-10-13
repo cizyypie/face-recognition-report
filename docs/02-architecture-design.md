@@ -136,3 +136,4 @@ sequenceDiagram
 - Menghubungkan komunikasi antar-layanan menggunakan *circuit breaker* berbasis Redis.
 - Menjalankan algoritma pencocokan biometrik pose-ke-pose (*same-pose matching*) dengan prinsip *zero-leak biometrics*.
 - Menerbitkan dan mengonsumsi token sekali pakai `proofNo` berumur 300 detik.
+

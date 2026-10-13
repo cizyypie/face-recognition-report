@@ -27,3 +27,4 @@ Penggunaan masker medis atau kacamata hitam pekat menutupi titik landmark pentin
    - Menyediakan fitur pembaruan template bagi karyawan yang mengalami perubahan fisik signifikan (misal perubahan berat badan drastis atau luka fisik).
 5. **Kompresi Resolusi Foto Adaptif:**
    - Menyesuaikan resolusi citra yang dikirim ke server secara otomatis berdasarkan kecepatan koneksi pengguna yang terdeteksi.
+

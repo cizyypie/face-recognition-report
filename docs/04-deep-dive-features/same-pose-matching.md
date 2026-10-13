@@ -46,3 +46,4 @@ Pencocokan menerapkan aturan *fail-fast*:
 - Jika terdapat salah satu pose tantangan yang menghasilkan jarak $\ge 0.55$, maka status verifikasi dinyatakan **gagal total** (`isMatch: 0`).
 - Sistem mencatat pose spesifik mana yang gagal (`failedPose`) untuk audit dan perbaikan posisi wajah pengguna.
 - Template biometrik yang tersimpan di database **tidak pernah dikirimkan kembali** ke browser. Respon server hanya mengembalikan status boolean `isMatch`, jarak per pose untuk visualisasi, dan token bukti `proofNo`.
+

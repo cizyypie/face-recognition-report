@@ -59,3 +59,4 @@ Pada commit `928d5cfb` (05 Oktober 2026), diputuskan untuk **menghapus total dep
 ### Dampak Positif
 - Penurunan drastis ukuran memori dan waktu inisialisasi awal.
 - Komponen arsitektur menjadi modular: backend Perl, sidecar Node.js, dan antarmuka Vue dapat dikembangkan dan diuji secara independen.
+

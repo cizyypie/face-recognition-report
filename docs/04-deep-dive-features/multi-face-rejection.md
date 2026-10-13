@@ -54,3 +54,4 @@ Di sisi penegakan aturan bisnis backend:
 - Subroutine `_verify_face_photo` memeriksa respons dari sidecar.
 - Jika menerima galat `MULTIPLE_FACES`, permintaan langsung dihentikan sebelum komputasi biometrik dilakukan.
 - Backend mengembalikan respons HTTP terstandarisasi dengan kode kegagalan dan pesan peringatan: `"Lebih dari satu wajah terdeteksi."`.
+
