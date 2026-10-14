@@ -16,7 +16,7 @@ Repositori ini memuat dokumentasi teknis, analisis arsitektur, perjalanan refakt
 ## Daftar Isi Dokumentasi
 
 1. [Gambaran Sistem & Masalah yang Diselesaikan](docs/01-overview-and-problem.md)
-   - Latar belakang transisi dari QR Code
+   - Latar belakang
    - Masalah titip absen (*buddy punching*) & spoofing
    - Kendala performa & bundle size di browser mobile
 2. [Desain Arsitektur Sistem](docs/02-architecture-design.md)
