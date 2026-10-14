@@ -1,10 +1,10 @@
 # Face Recognition Attendance System — Engineering Case Study & Internship Report
 
-Repositori ini memuat dokumentasi teknis lengkap, analisis arsitektur, perjalanan refaktorisasi 18 commit, dan evaluasi implementasi sistem presensi kehadiran biometrik berbasis pengenalan wajah (*face recognition*) nirsentuh untuk aplikasi PWA SWB.
+Repositori ini memuat dokumentasi teknis, analisis arsitektur, perjalanan refaktorisasi 18 commit, dan evaluasi implementasi sistem presensi kehadiran biometrik berbasis pengenalan wajah (*face recognition*) untuk aplikasi PWA SWB.
 
 ---
 
-## Ringkasan Eksekutif
+## Ringkasan
 
 - **Sistem:** Face Recognition Attendance System (PWA + Sidecar AI + DCAF Perl Backend)
 - **Periode Pengembangan:** 30 September 2026 – 13 Oktober 2026
@@ -37,12 +37,6 @@ Repositori ini memuat dokumentasi teknis lengkap, analisis arsitektur, perjalana
    - Evaluasi pencahayaan ekstrem, rencana UI admin approval, dan re-enrollment
 7. [Dokumen Laporan Lengkap (Monolitik)](docs/full-progress-report.md)
    - Naskah laporan komprehensif 904 baris
-8. [Materi Presentasi](presentation/)
-   - [Naskah Slide Presentasi (12 Slide)](presentation/presentation-slides.md)
-   - [Script Otomasi PowerPoint Generator](presentation/generate_pptx.py)
-   - Berkas Presentasi PPTX (`presentation/face-recognition-presentation.pptx`)
-
----
 
 ## Sorotan Fitur Utama
 
@@ -57,17 +51,4 @@ Repositori ini memuat dokumentasi teknis lengkap, analisis arsitektur, perjalana
 
 ---
 
-## Panduan Menjalankan Generator Presentasi
-
-Untuk menghasilkan ulang berkas PowerPoint presentasi:
-
-```bash
-cd presentation
-python3 -m venv venv
-source venv/bin/activate
-pip install python-pptx
-python3 generate_pptx.py
-```
-
-Berkas `face-recognition-presentation.pptx` akan diperbarui secara otomatis.
 
