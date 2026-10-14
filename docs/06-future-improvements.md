@@ -12,7 +12,7 @@ Penggunaan masker medis atau kacamata hitam pekat menutupi titik landmark pentin
 
 ---
 
-## 2. Rencana Pengembangan Selanjutnya (Action Items)
+## 2. Perlu Tindakan Selanjutnya (Action Items)
 
 ### Prioritas Tinggi:
 1. **Uji Lapangan Multi-Lokasi:**
