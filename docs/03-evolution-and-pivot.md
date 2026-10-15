@@ -13,10 +13,11 @@ Pengembangan sistem absensi wajah pada branch `face-attendance-human` berlangsun
 | **Fase 3: Anti-Spoof** | 6 – 8 Okt 2026 | Dual pipeline anti-spoofing & UX feedback | Integrasi MiniFASNet ganda (browser WASM + sidecar), pembuatan Dockerfile sidecar, dan panduan visual oval ring. |
 | **Fase 4: Liveness & Keamanan** | 8 – 9 Okt 2026 | Penyempurnaan liveness & backend hardening | Pose tilt (pitch) dan smile menggantikan mouth-open. Pencocokan biometrik dipindah ke server (zero-leak). Pengenalan token Redis `proofNo` dan JWT-first. |
 | **Fase 5: Performa & Ketahanan** | 12 – 13 Okt 2026 | Optimasi runtime, cache, dan reliabilitas jaringan | Pemuatan model paralel sekali pakai, persistent Cache Storage, pose sampling 3-frame, auto-stop kamera, dan auto-retry jaringan saat pendaftaran. |
+| **Fase 6: Visual & Ergonomi Kamera** | 15 Okt 2026 | Optimasi visual guide, ergonomi framing, dan pencahayaan layar | Perbaikan bug fogging oval (`evenodd`), solid white fill-light, reposisi oval ke atas, instruksi dinamis di bawah oval, screen wake lock, dan pembersihan UI. |
 
 ---
 
-## 3.2 Linimasa Lengkap 18 Commit
+## 3.2 Linimasa Lengkap 22 Commit
 
 | No | Hash | Tanggal | Pesan Commit | Kategori / Fase |
 |---|---|---|---|---|
@@ -38,6 +39,10 @@ Pengembangan sistem absensi wajah pada branch `face-attendance-human` berlangsun
 | C-16 | `4fcf749b` | 12 Okt 2026 | feat: prevent multiple simultaneous detections by introducing isStarting flag | Fase 5 |
 | C-17 | `1d407b2e` | 12 Okt 2026 | feat: implement pose sampling for improved face recognition stability and caching of model files | Fase 5 |
 | C-18 | `0b8b1ab0` | 13 Okt 2026 | feat: implement retry logic for face recognition enrollment to handle network issues | Fase 5 |
+| C-19 | `c3a48645` | 15 Okt 2026 | fix(face-recog): fix foggy oval overlay and set solid white background | Fase 6 |
+| C-20 | `d70dc9b5` | 15 Okt 2026 | refactor: simplify top bar layout and remove unused buttons in face recognition pages | Fase 6 |
+| C-21 | `756d3f76` | 15 Okt 2026 | refactor: enhance hint display logic and improve styling in face recognition components | Fase 6 |
+| C-22 | `b9af65a0` | 15 Okt 2026 | feat: implement wake lock functionality to enhance user experience during face recognition | Fase 6 |
 
 ---
 
@@ -59,4 +64,24 @@ Pada commit `928d5cfb` (05 Oktober 2026), diputuskan untuk **menghapus total dep
 ### Dampak Positif
 - Penurunan drastis ukuran memori dan waktu inisialisasi awal.
 - Komponen arsitektur menjadi modular: backend Perl, sidecar Node.js, dan antarmuka Vue dapat dikembangkan dan diuji secara independen.
+
+---
+
+## 3.4 Detail Perubahan Fase 6: Visual & Ergonomi Kamera (15 Okt 2026)
+
+### 1. Perbaikan Bug Foggy Oval & Solid White Fill-Light (Commit C-19 — `c3a48645`)
+- **What:** Mengganti compositing `destination-out` dengan `ctx.fill('evenodd')`. Area luar oval diisi putih solid `#FFFFFF`, dalam oval 100% transparan tanpa residu.
+- **Why:** Pada kode lama, `ctx.fillStyle` tidak di-reset sebelum `destination-out`, menyisakan residu putih ~25% di dalam oval yang merusak kontras wajah dan memicu penolakan anti-spoof palsu (`0.01`). Area luar putih solid sekaligus berfungsi sebagai *screen fill light* (ring light alami dari layar HP).
+
+### 2. Pembersihan UI & Judul Simetris (Commit C-20 — `d70dc9b5`)
+- **What:** Menghapus chip debug (`Confidence`, `Wajah`, timestamp), menyembunyikan tombol flash/settings di topbar, merapikan judul topbar ke posisi tengah simetris, dan auto-hide dropdown tipe absen setelah dipilih.
+- **Why:** Menghilangkan distraksi visual, memaksimalkan area vertikal untuk preview kamera, dan memberi tampilan antarmuka yang bersih.
+
+### 3. Ergonomi Posisi Oval & Teks Panduan Lebih Jelas (Commit C-21 — `756d3f76`)
+- **What:** Menggeser pusat oval ke area atas (`cy = ch * 0.38`), menempatkan pill instruksi tepat di bawah lengkungan bawah oval (`hintTop = cy + ovalH + 18px`), dan memperbesar font instruksi menjadi 15px tebal.
+- **Why:** Pengguna memegang smartphone setinggi mata (bukan di tengah bawah). Penempatan instruksi tepat di bawah oval dengan font lebih besar memudahkan pengguna membaca instruksi pose tanpa memalingkan pandangan dari kamera.
+
+### 4. Kontrol Kamera Eksplisit & Screen Wake Lock (Commit C-22 — `b9af65a0`)
+- **What:** Kamera hanya aktif saat tombol "Mulai Kamera" ditekan, serta mengintegrasikan Screen Wake Lock API (`navigator.wakeLock`) dan panduan pencahayaan redup.
+- **Why:** Memberikan kontrol penuh kepada pengguna sebelum streaming aktif, serta mencegah layar meredup/tidur (*auto-dimming/sleep*) saat proses verifikasi berlangsung.
 

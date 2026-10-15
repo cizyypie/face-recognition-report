@@ -1,18 +1,18 @@
 # Face Recognition Attendance System — Engineering Case Study & Comprehensive Progress Report
 ## Branch: `face-attendance-human` | Aplikasi PWA SWB
 
-**Versi Dokumen:** 1.2  
-**Tanggal Terakhir Diperbarui:** 14 Oktober 2026  
-**Periode Pengembangan:** 30 September 2026 – 13 Oktober 2026  
-**Total Kontribusi:** 18 commit | 31 file terdampak | +9.973 baris baru / −718 baris dihapus (+9.255 baris efektif)  
-**Fokus Utama:** Dual Anti-Spoofing, Server-Side Same-Pose Verification, Tokenisasi Single-Use, Optimasi Pemuatan Model WASM.
+**Versi Dokumen:** 1.3  
+**Tanggal Terakhir Diperbarui:** 15 Oktober 2026  
+**Periode Pengembangan:** 30 September 2026 – 15 Oktober 2026  
+**Total Kontribusi:** 22 commit | 31 file terdampak  
+**Fokus Utama:** Dual Anti-Spoofing, Server-Side Same-Pose Verification, Tokenisasi Single-Use, Optimasi Pemuatan Model WASM, dan Visual/Ergonomi Kamera.
 
 ---
 
 ## Daftar Isi
 
 1. [Executive Summary & Masalah yang Diselesaikan](#1-executive-summary--masalah-yang-diselesaikan)
-2. [Log Kontribusi & Evolusi Teknis (18 Commits Journey)](#2-log-kontribusi--evolusi-teknis-18-commits-journey)
+2. [Log Kontribusi & Evolusi Teknis (22 Commits Journey)](#2-log-kontribusi--evolusi-teknis-22-commits-journey)
 3. [Arsitektur Sistem Terbaru](#3-arsitektur-sistem-terbaru-current-state-architecture)
 4. [Penambahan Teknis Mendalam (Deep-Dive Features)](#4-penambahan-teknis-mendalam-deep-dive-features-added)
 5. [Project Structure: Pemetaan Berkas Terdampak](#5-project-structure-pemetaan-berkas-yang-ditambahkan--dimodifikasi)
@@ -63,7 +63,7 @@ Keputusan pivot dibuat pada commit ke-6 (`928d5cfb`) untuk **menanggalkan `@vlad
 
 ## 2. Log Kontribusi & Evolusi Teknis (18 Commits Journey)
 
-Delapan belas commit dalam branch ini membentuk lima fase evolusi yang jelas, dari eksplorasi awal hingga implementasi sistem yang produktif.
+Dua puluh dua commit dalam branch ini membentuk enam fase evolusi yang jelas, dari eksplorasi awal hingga implementasi sistem yang produktif.
 
 ### Ikhtisar Timeline Commit
 
@@ -87,6 +87,10 @@ Delapan belas commit dalam branch ini membentuk lima fase evolusi yang jelas, da
 | C-16 | `4fcf749b` | 2026-10-12 | feat: prevent multiple simultaneous detections (isStarting flag) | Fase 5 |
 | C-17 | `1d407b2e` | 2026-10-12 | feat: pose sampling and persistent model file caching | Fase 5 |
 | C-18 | `0b8b1ab0` | 2026-10-13 | feat: retry logic for face enrollment on network issues | Fase 5 |
+| C-19 | `c3a48645` | 2026-10-15 | fix(face-recog): fix foggy oval overlay and set solid white background | Fase 6 |
+| C-20 | `d70dc9b5` | 2026-10-15 | refactor: simplify top bar layout and remove unused buttons in face recognition pages | Fase 6 |
+| C-21 | `756d3f76` | 2026-10-15 | refactor: enhance hint display logic and improve styling in face recognition components | Fase 6 |
+| C-22 | `b9af65a0` | 2026-10-15 | feat: implement wake lock functionality to enhance user experience during face recognition | Fase 6 |
 
 ---
 
@@ -355,6 +359,46 @@ Pengiriman pendaftaran wajah (`POST /mobile/insertFaceRecognition`) kini memakai
 - Retry hanya untuk gangguan jaringan (timeout, tanpa response, HTTP 5xx). Penolakan dari server (`code !== 0`, misalnya spoof / wajah tidak terdeteksi) tidak diulang.
 - Aman diulang karena server menimpa profil wajah user yang sama (tidak membuat duplikat).
 - Selama retry, loading menampilkan "Koneksi lambat, mencoba ulang (2/3)...". Jika tetap gagal, foto dan descriptor tetap tersimpan sehingga pengguna cukup menekan Kirim lagi tanpa mengulang pose.
+
+---
+
+### Fase 6: Visual, Ergonomi Kamera, & Screen Fill Light (15 Okt 2026)
+
+**Commit C-19 — `c3a48645` — 15 Okt 2026**
+
+```
+fix(face-recog): fix foggy oval overlay and set solid white background
+```
+
+- **What:** Mengganti compositing `destination-out` dengan `ctx.fill('evenodd')`. Area luar oval diisi putih solid `#FFFFFF`, dalam oval 100% transparan tanpa residu.
+- **Why:** Pada kode lama, `ctx.fillStyle` tidak di-reset sebelum `destination-out`, menyisakan residu putih ~25% di dalam oval yang merusak kontras wajah dan memicu penolakan anti-spoof palsu (`0.01`). Area luar putih solid sekaligus berfungsi sebagai *screen fill light* (ring light alami dari layar HP).
+
+**Commit C-20 — `d70dc9b5` — 15 Okt 2026**
+
+```
+refactor: simplify top bar layout and remove unused buttons in face recognition pages
+```
+
+- **What:** Menghapus chip debug (`Confidence`, `Wajah`, timestamp), menyembunyikan tombol flash/settings di topbar, merapikan judul topbar ke posisi tengah simetris, dan auto-hide dropdown tipe absen setelah dipilih.
+- **Why:** Menghilangkan distraksi visual, memaksimalkan area vertikal untuk preview kamera, dan memberi tampilan antarmuka yang bersih.
+
+**Commit C-21 — `756d3f76` — 15 Okt 2026**
+
+```
+refactor: enhance hint display logic and improve styling in face recognition components
+```
+
+- **What:** Menggeser pusat oval ke area atas (`cy = ch * 0.38`), menempatkan pill instruksi tepat di bawah lengkungan bawah oval (`hintTop = cy + ovalH + 18px`), dan memperbesar font instruksi menjadi 15px tebal.
+- **Why:** Pengguna memegang smartphone setinggi mata (bukan di tengah bawah). Penempatan instruksi tepat di bawah oval dengan font lebih besar memudahkan pengguna membaca instruksi pose tanpa memalingkan pandangan dari kamera.
+
+**Commit C-22 — `b9af65a0` — 15 Okt 2026**
+
+```
+feat: implement wake lock functionality to enhance user experience during face recognition
+```
+
+- **What:** Kamera hanya aktif saat tombol "Mulai Kamera" ditekan, serta mengintegrasikan Screen Wake Lock API (`navigator.wakeLock`) dan panduan pencahayaan redup.
+- **Why:** Memberikan kontrol penuh kepada pengguna sebelum streaming aktif, serta mencegah layar meredup/tidur (*auto-dimming/sleep*) saat proses verifikasi berlangsung.
 
 ---
 

@@ -1,15 +1,15 @@
 # Face Recognition Attendance System — Engineering Case Study & Internship Report
 
-Repositori ini memuat dokumentasi teknis, analisis arsitektur, perjalanan refaktorisasi 18 commit, dan evaluasi implementasi sistem presensi kehadiran biometrik berbasis pengenalan wajah (*face recognition*) untuk aplikasi PWA SWB.
+Repositori ini memuat dokumentasi teknis, analisis arsitektur, perjalanan refaktorisasi 22 commit, dan evaluasi implementasi sistem presensi kehadiran biometrik berbasis pengenalan wajah (*face recognition*) untuk aplikasi PWA SWB.
 
 ---
 
 ## Ringkasan
 
 - **Sistem:** Face Recognition Attendance System (PWA + Sidecar AI + DCAF Perl Backend)
-- **Periode Pengembangan:** 30 September 2026 – 13 Oktober 2026
-- **Total Kontribusi:** 18 commit | 31 file terdampak | +9.973 baris baru / −718 baris dihapus
-- **Fokus Utama:** Dual Anti-Spoofing, Server-Side Same-Pose Verification, Tokenisasi Single-Use, Optimasi Pemuatan Model WASM.
+- **Periode Pengembangan:** 30 September 2026 – 15 Oktober 2026
+- **Total Kontribusi:** 22 commit | 31 file terdampak
+- **Fokus Utama:** Dual Anti-Spoofing, Server-Side Same-Pose Verification, Tokenisasi Single-Use, Optimasi Pemuatan Model WASM, dan Visual/Ergonomi Kamera.
 
 ---
 
@@ -22,9 +22,10 @@ Repositori ini memuat dokumentasi teknis, analisis arsitektur, perjalanan refakt
 2. [Desain Arsitektur Sistem](docs/02-architecture-design.md)
    - Split architecture: Client Edge (WASM) vs Sidecar AI Container (Port 3100) vs Backend (DCAF Perl)
    - Diagram komponen & Sequence diagram end-to-end
-3. [Perjalanan Evolusi & Refaktorisasi (18 Commits Journey)](docs/03-evolution-and-pivot.md)
-   - 5 Fase pengembangan
+3. [Perjalanan Evolusi & Refaktorisasi (22 Commits Journey)](docs/03-evolution-and-pivot.md)
+   - 6 Fase pengembangan
    - Analisis keputusan pivot arsitektur (menanggalkan `@vladmandic/human`, migrasi ke `face-api` + `YuNet`)
+   - Fase 6: Visual, Ergonomi Kamera, & Screen Fill Light
 4. [Fitur-Fitur Mendalam (Deep Dive)](docs/04-deep-dive-features/)
    - [Dual Anti-Spoofing Pipeline](docs/04-deep-dive-features/dual-anti-spoofing.md) (MiniFASNetV2-SE WASM + Sidecar reflect padding)
    - [Server-Side Same-Pose Matching](docs/04-deep-dive-features/same-pose-matching.md) (Zero-leak biometrics, per-pose threshold)
